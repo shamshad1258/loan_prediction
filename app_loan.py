@@ -1,4 +1,3 @@
-%%writefile Loan_Approval_App.py
 import streamlit as st
 import pandas as pd
 import joblib
