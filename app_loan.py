@@ -71,7 +71,7 @@ if st.button("Predict Loan Status"):
       "luxury_assets_value": luxury_assets_value
   }])
 
-  prediction = model.predict(input_data)
+  prediction = model.predict(X)
 
   if prediction[0] == 1:
       st.success("✅ Loan Approved")
