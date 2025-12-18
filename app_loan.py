@@ -1,3 +1,4 @@
+%%writefile Loan_Approval_App.py
 import streamlit as st
 import pandas as pd
 import joblib
@@ -58,26 +59,23 @@ self_employed = 1 if self_employed == "Yes" else 0
 # -------- PREDICTION --------
 if st.button("Predict Loan Status"):
 
-  x = pd.DataFrame([{
-      "no_of_dependents": no_of_dependents,
-      "education": education,
-      "self_employed": self_employed,
-      "income_annum": income_annum,
-      "loan_amount": loan_amount,
-      "loan_term": loan_term,
-      "cibil_score": cibil_score,
-      "residential_assets_value": residential_assets_value,
-      "commercial_assets_value": commercial_assets_value,
-      "luxury_assets_value": luxury_assets_value
-  }])
+    input_data = np.array([[
+        no_of_dependents,
+        education,
+        self_employed,
+        income_annum,
+        loan_amount,
+        loan_term,
+        cibil_score,
+        residential_assets_value,
+        commercial_assets_value,
+        luxury_assets_value
+    ]])
 
-  prediction = model.predict(x)
+    prediction = model.predict(input_data)
 
-  if prediction[0] == 1:
-      st.success("✅ Loan Approved")
-  else:
-      st.error("❌ Loan Rejected")
-
-
-    
+    if prediction[0] == 1:
+        st.success("✅ Loan Approved")
+    else:
+        st.error("❌ Loan Rejected")
 
