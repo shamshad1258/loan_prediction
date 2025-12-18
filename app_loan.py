@@ -58,7 +58,7 @@ self_employed = 1 if self_employed == "Yes" else 0
 # -------- PREDICTION --------
 if st.button("Predict Loan Status"):
 
-  X = pd.DataFrame([{
+  x = pd.DataFrame([{
       "no_of_dependents": no_of_dependents,
       "education": education,
       "self_employed": self_employed,
@@ -71,7 +71,7 @@ if st.button("Predict Loan Status"):
       "luxury_assets_value": luxury_assets_value
   }])
 
-  prediction = model.predict(X)
+  prediction = model.predict(x)
 
   if prediction[0] == 1:
       st.success("✅ Loan Approved")
