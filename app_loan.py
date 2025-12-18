@@ -56,25 +56,28 @@ education = 1 if education == "Graduate" else 0
 self_employed = 1 if self_employed == "Yes" else 0
 
 # -------- PREDICTION --------
+import pandas as pd
+
 if st.button("Predict Loan Status"):
 
-    input_data = np.array([[
-        no_of_dependents,
-        education,
-        self_employed,
-        income_annum,
-        loan_amount,
-        loan_term,
-        cibil_score,
-        residential_assets_value,
-        commercial_assets_value,
-        luxury_assets_value
-    ]])
+    X = pd.DataFrame([{
+        "no_of_dependents": no_of_dependents,
+        "education": education,
+        "self_employed": self_employed,
+        "income_annum": income_annum,
+        "loan_amount": loan_amount,
+        "loan_term": loan_term,
+        "cibil_score": cibil_score,
+        "residential_assets_value": residential_assets_value,
+        "commercial_assets_value": commercial_assets_value,
+        "luxury_assets_value": luxury_assets_value
+    }])
 
-    prediction = model.predict(input_data)
+    prediction = model.predict(X)[0]
 
-    if prediction[0] == 1:
-        st.success("✅ Loan Approved")
+    if prediction == 1:
+        st.success("Loan Approved")
     else:
-        st.error("❌ Loan Rejected")
+        st.error("Loan Rejected")
+
 
