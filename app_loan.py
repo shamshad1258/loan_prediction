@@ -1,26 +1,26 @@
 import streamlit as st
+import pandas as pd
 import joblib
 import numpy as np
 
-# Load trained model (pkl must be in same repo)
+# Load trained model
 model = joblib.load("Loan_Approval_model.pkl")
 
-st.title("🏦 Loan Approval Prediction")
-st.write("Fill the details and click Predict to check loan status")
+st.title("🏦 Loan Approval Prediction App")
 
 # -------- INPUTS --------
 no_of_dependents = st.number_input(
-    "Number of Dependents", min_value=0, max_value=10, step=1
+    "Number of Dependents", min_value=0, step=1
 )
 
 education = st.selectbox(
     "Education",
-    ["Graduate", "Not Graduate"]
+    options=["Graduate", "Not Graduate"]
 )
 
 self_employed = st.selectbox(
     "Self Employed",
-    ["Yes", "No"]
+    options=["Yes", "No"]
 )
 
 income_annum = st.number_input(
@@ -32,7 +32,7 @@ loan_amount = st.number_input(
 )
 
 loan_term = st.number_input(
-    "Loan Term (months)", min_value=1, step=12
+    "Loan Term (in months)", min_value=1, step=12
 )
 
 cibil_score = st.number_input(
@@ -58,22 +58,26 @@ self_employed = 1 if self_employed == "Yes" else 0
 # -------- PREDICTION --------
 if st.button("Predict Loan Status"):
 
-    X = np.array([[
-        no_of_dependents,
-        education,
-        self_employed,
-        income_annum,
-        loan_amount,
-        loan_term,
-        cibil_score,
-        residential_assets_value,
-        commercial_assets_value,
-        luxury_assets_value
-    ]])
+  X = pd.DataFrame([{
+      "no_of_dependents": no_of_dependents,
+      "education": education,
+      "self_employed": self_employed,
+      "income_annum": income_annum,
+      "loan_amount": loan_amount,
+      "loan_term": loan_term,
+      "cibil_score": cibil_score,
+      "residential_assets_value": residential_assets_value,
+      "commercial_assets_value": commercial_assets_value,
+      "luxury_assets_value": luxury_assets_value
+  }])
 
-    prediction = model.predict(X)[0]
+  prediction = model.predict(input_data)
 
-    if prediction == 1:
-        st.success("Loan Approved")
-    else:
-        st.error("Loan Rejected")
+  if prediction[0] == 1:
+      st.success("✅ Loan Approved")
+  else:
+      st.error("❌ Loan Rejected")
+
+
+    
+
