@@ -4,7 +4,7 @@ import joblib
 import numpy as np
 
 # Load trained model
-model = joblib.load("Loan_Approval_model.pkl")
+model = joblib.load("Loan_Approval_model_new.pkl")
 
 st.title("🏦 Loan Approval Prediction App")
 
@@ -54,7 +54,6 @@ luxury_assets_value = st.number_input(
 bank_asset_value = st.number_input(
     "Bank Asset Value", min_value=0
 )
-
 # -------- ENCODING --------
 education = 1 if education == "Graduate" else 0
 self_employed = 1 if self_employed == "Yes" else 0
