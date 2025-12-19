@@ -52,6 +52,10 @@ luxury_assets_value = st.number_input(
     "Luxury Assets Value", min_value=0
 )
 
+bank_asset_value = st.number_input(
+    "Bank Asset Value", min_value=0
+)
+
 # -------- ENCODING --------
 education = 1 if education == "Graduate" else 0
 self_employed = 1 if self_employed == "Yes" else 0
