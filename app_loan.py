@@ -9,7 +9,6 @@ model = joblib.load("Loan_Approval_model.pkl")
 st.title("🏦 Loan Approval Prediction App")
 
 # -------- INPUTS --------
-loan_id = st.text_input("Loan ID")
 no_of_dependents = st.number_input(
     "Number of Dependents", min_value=0, step=1
 )
@@ -64,7 +63,6 @@ self_employed = 1 if self_employed == "Yes" else 0
 if st.button("Predict Loan Status"):
 
     input_data = np.array([[
-        loan_id,
         no_of_dependents,
         education,
         self_employed,
