@@ -64,6 +64,7 @@ self_employed = 1 if self_employed == "Yes" else 0
 if st.button("Predict Loan Status"):
 
     input_data = np.array([[
+        loan_id,
         no_of_dependents,
         education,
         self_employed,
@@ -73,7 +74,8 @@ if st.button("Predict Loan Status"):
         cibil_score,
         residential_assets_value,
         commercial_assets_value,
-        luxury_assets_value
+        luxury_assets_value,
+        bank_asset_value
     ]])
 
     prediction = model.predict(input_data)
